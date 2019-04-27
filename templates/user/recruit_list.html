@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+    <div class="row">
+        {% for recruit in all_recruit %}
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    {% if recruit.item_image %}
+                        <img src='{{ MEDIA_URL }}{{ recruit.item_image }}' style="width:222px;height: 150px">
+                    {% endif %}
+
+                    <div class="caption">
+                        <h5 style="margin: 5px">{{ recruit.title|truncatechars:12 }}</h5>
+                        <hr style="margin: 10px">
+                        {% if recruit.is_recruitment %}
+                            <h4 style="margin: 5px">-招领启事</h4>
+                        {% else %}
+                            <h4 style="margin: 5px">-寻物启事</h4>
+                        {% endif %}
+
+                        <h6 style="margin: 5px; margin-left: 150px;color: red">{{ recruit.show_time }}</h6>
+                    {% if recruit.is_recruitment %}
+                             <a href="{% url 'suzl:find_detail_view' recruit.id %}">点我查看详情</a>
+                        {% else %}
+                             <a href="{% url 'suzl:lost_detail_view' recruit.id %}">点我查看详情</a>
+                        {% endif %}
+
+
+                        <h4></h4>
+                    </div>
+
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+    <div style="text-align:center ">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {{ pages |safe }}
+            </ul>
+        </nav>
+    </div>
+{% endblock %}

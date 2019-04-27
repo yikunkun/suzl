@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+    <form class="form-horizontal" style="margin-top: 30px" action="" method="post" novalidate >
+        {% csrf_token %}
+        {% for form in form_obj %}
+            <div class="form-group {% if form.errors %}has-error{% endif %}">
+                <label for="{{ form.id_for_label }}" class="col-sm-2 control-label">{{ form.label }}</label>
+                <div class="col-sm-7">
+                    {{ form }}
+                    <span class="help-block">{{ form.errors.0 }}</span>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">注册</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+{% block js %}
+<script src="{% static 'plugins/jQuery.js' %}"></script>
+<script>
+    $('input').focus(function () {
+        $(this).next().text('').parent().parent().removeClass('has-error')
+    })
+
+</script>
+{% endblock %}

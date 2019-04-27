@@ -1,0 +1,120 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block css %}
+    .hd .label{
+    float: left;
+    background: #666;
+    color: #fff;
+    font-size: 14px;
+    width: 80px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    }
+    .hd .selected-items{ margin-left: 100px;
+    padding: 8px;
+    }
+    .choices li {
+    float:left;margin-right:40px;margin-bottom:20px}
+
+{% endblock %}
+{% block content %}
+    <div class="row " style="margin-left: 2px; margin-right: 2px">
+        <div class="hd">
+            <div class="label">筛选条件</div>
+            <div class="selected-items"></div>
+
+        </div>
+        <br>
+
+        <div>
+            <div style="font-weight: 500;margin-top: 10px;">
+                <label style="float:left;margin-right: 10px">地点筛选：</label>
+                <ul class="choices" style="list-style: none">
+                    <li><a href="?query=明理楼">明理楼</a></li>
+                    <li><a href="?query=博雅楼">博雅楼</a></li>
+                    <li><a href="?query=清和苑">清和苑</a></li>
+                    <li><a href="?query=学苑餐厅">学苑餐厅</a></li>
+                </ul>
+            </div>
+
+
+        </div>
+        <br>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div>
+                <div style="font-weight: 500;margin-top: 10px;margin-bottom: 10px;margin-right: 900px">
+                    <label>快速筛选：</label>
+                    <ul class="choices" style="list-style: none">
+                        失物类型: <select name="lost_type" style="height: 25px">
+                            <option value="0">请选择</option>
+                            <option value="钱包">钱包</option>
+                            <option value="钥匙">钥匙</option>
+                            <option value="宠物">宠物</option>
+                            <option value="卡类/证照">卡类/证照</option>
+                            <option value="数码产品">数码产品</option>
+                            <option value="手袋/挎包">手袋/挎包</option>
+                            <option value="衣服/鞋帽">衣服/鞋帽</option>
+                            <option value="首饰/挂饰">首饰/挂饰</option>
+                            <option value="行李/包裹">行李/包裹</option>
+                            <option value="书籍/文件">书籍/文件</option>
+                            <option value="其他">其他</option>
+                        </select>
+
+                    </ul>
+
+                </div>
+            </div>
+            <button class="btn btn-primary">筛选</button>
+        </form>
+
+    </div>
+
+
+
+
+
+    <br>
+
+    <div class="row">
+        {% for recruit in all_recruit %}
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    {% if recruit.item_image %}
+                        <img src='{{ MEDIA_URL }}{{ recruit.item_image }}' style="width:222px;height: 150px">
+                    {% endif %}
+
+                    <div class="caption">
+                        <h5 style="margin: 5px">{{ recruit.title|truncatechars:12 }}</h5>
+                        <hr style="margin: 10px">
+                        {% if recruit.is_recruitment %}
+                            <h4 style="margin: 5px">-招领启事</h4>
+                        {% else %}
+                            <h4 style="margin: 5px">-寻物启事</h4>
+                        {% endif %}
+
+                        <h6 style="margin: 5px; margin-left: 150px;color: red">{{ recruit.show_time }}</h6>
+                        {% if recruit.is_recruitment %}
+                            <a href="{% url 'suzl:find_detail_view' recruit.id %}">点我查看详情</a>
+                        {% else %}
+                            <a href="{% url 'suzl:lost_detail_view' recruit.id %}">点我查看详情</a>
+                        {% endif %}
+
+
+                        <h4></h4>
+                    </div>
+
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+    <div style="text-align:center ">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {{ pages |safe }}
+            </ul>
+        </nav>
+    </div>
+{% endblock %}

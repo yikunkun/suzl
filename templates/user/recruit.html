@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">发布寻物启事</h3>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" method="post" action="" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                {% for item in form_obj %}
+                    <div class="form-group">
+                        <label for="{{ item.id_for_label }}" class="col-sm-2 control-label">{{ item.label }}</label>
+                        {% if item.name == 'image' %}
+                            <div class="col-sm-8">
+                                <div class="col-sm-4">{{ item }}</div>
+                            </div>
+                        {% else %}
+                            <div class="col-sm-8">
+                                {{ item }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">发布</button>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

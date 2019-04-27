@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title ">详细信息</h2>
+        </div>
+        <div class="panel-body">
+            <div style="font-weight: bold;font-size: x-large ">{{ obj.title }}</div>
+            <div style="margin-top: 20px;margin-bottom: 30px">
+                <span>{{ obj.pub_time|date:"Y-m-d H:i:s" }}  发布</span>
+                <span style="margin-left: 100px">当前状态:{{ obj.get_status_display }}</span></div>
+            <div>{{ obj.detailed_description }}</div>
+            {% if obj.item_image %}
+                <div style="margin-bottom: 10px;margin-top: 10px;">
+                    <img src='{{ MEDIA_URL }}{{ obj.item_image }}' style="width: 800px;height: 400px">
+                </div>
+            {% endif %}
+            <div><span style="color: red; margin-bottom: 10px;">诚信，从你我做起！</span>
+                本站不欢迎利用本站发布的信息来诱骗失主，请给自己留一点自尊，也请给这个社会多一份爱心。
+            </div>
+            <hr>
+            <div>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#contact" aria-controls="contact" role="tab"
+                                                              data-toggle="tab">联系方式</a></li>
+                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab"
+                                               data-toggle="tab">相关线索</a></li>
+                    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab"
+                                               data-toggle="tab">用户评价</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="contact">
+                        <div style="margin-top: 10px;margin-bottom: 10px">
+                            <span style="font-weight: bold">拾物类别:</span><span>{{ obj.get_lost_type_display }}</span>
+                        </div>
+                        <div style="margin-top: 10px;margin-bottom: 10px">
+                            <span style="font-weight: bold">拾物日期:</span><span>{{ obj.lost_time }}</span>
+                        </div>
+                        <div style="margin-top: 10px;margin-bottom: 10px">
+                            <span style="font-weight: bold">拾物地点:</span><span>{{ obj.lost_place }}</span>
+                        </div>
+                        <div style="margin-top: 10px;margin-bottom: 10px">
+                            <span style="font-weight: bold">联系人:</span><span>{{ obj.contact }}</span>
+                        </div>
+                         <div style="margin-top: 10px;margin-bottom: 10px">
+                            <span style="font-weight: bold">QQ:</span><span>{{ obj.qq }}</span>
+                        </div>
+                         <div style="margin-top: 10px;margin-bottom: 10px">
+                            <span style="font-weight: bold">Email:</span><span>{{ obj.email }}</span>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="profile">9.9提供线索</div>
+                    <div role="tabpanel" class="tab-pane" id="messages">找到我给你抱抱举高高。</div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

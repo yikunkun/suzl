@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--告诉IE以最高级模式渲染文档-->
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <link rel="icon" href="{% static 'imgs/layout/luffy-logo.png' %}">
+    <title>失物招领</title>
+    <style>
+            {% block css %}
+
+            {% endblock %}
+    </style>
+
+
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.3.7/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.css' %}">
+
+</head>
+<body style="">
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <img style="margin-top: 5px; float:left; margin-right: 2px" src="{% static 'imgs/layout/logo.svg' %}"
+                 alt="">
+            <a class="navbar-brand" href="#">&nbsp失物招领</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="navbar-right">
+                <img src="{% static 'imgs/layout/default.png' %}" class="img-circle"
+                     style="width:40px; margin-top:2.5px;margin-right: 3px" alt="" data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false">
+                <ul class="dropdown-menu">
+                    <li><a href="#">个人中心</a></li>
+                    <li><a href="#">修改密码</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">注销</a></li>
+                </ul>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'suzl:lost_list' %}">寻物启事 </a>
+                </li>
+                <li><a href="{% url 'suzl:find_list' %}">招领启事 </a>
+                </li>
+                <li><a href="{% url 'suzl:recruit' %}">发布 <i class="fa fa-plus-circle fa-1x" aria-hidden="true"></i></a>
+                </li>
+                <li><a href="#">任务 <i class="fa fa-bell" aria-hidden="true"></i>&nbsp;<span class="badge">4</span></a>
+                </li>
+                <li><a href="#">通知 <i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;<span class="badge">2</span></a>
+                </li>
+                <li><a href="#">消息 <i class="fa fa-commenting" aria-hidden="true"></i>&nbsp;<span class="badge">6</span></a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right"  action="">
+
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="输入物品特征快速搜索" name="query">
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar" id="active">
+
+
+            </ul>
+        </div>
+        <div class=" col-sm-9 col-md-10 col-md-offset-2 col-sm-offset-3" style="margin-top: 20px">
+
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </div>
+</div>
+<script src="{% static 'plugins/jQuery.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-3.3.7/js/bootstrap.js' %}"></script>
+
+{% block js %}
+
+{% endblock %}
+
+</body>
+</html>
